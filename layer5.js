@@ -1,0 +1,22 @@
+var layer5text = `51111,Tall Cactus,?,1,?,?,?
+22115,Blue Hyacinth,?,?,1,?,?
+11115,Green Hyacinth,?,?,1,?,?
+66115,Pink Hyacinth,?,?,?,?,?
+55115,Red Hyacinth,?,?,?,1,?
+88115,White Hyacinth,?,?,1,?,?
+33115,Yellow Hyacinth,?,?,?,1,?
+21113,Tall Blue Rose,?,1,1,?,?
+71113,Tall Black Rose,?,1,1,?,?
+31113,Tall Golden Rose,?,1,1,?,?
+11113,Tall Green Rose,?,1,1,?,?
+61113,Tall Pink Rose,?,1,1,?,?
+51113,Tall Red Rose,?,1,1,1,?
+81113,Tall White Rose,?,1,1,?,?
+41113,Tall Yellow Rose,?,1,1,1,?
+42324,Blue Tulip Bush,?,1,1,?,?
+47374,Black Tulip Bush,?,1,1,?,?
+41314,Green Tulip Bush,?,1,1,?,?
+46364,Pink Tulip Bush,?,1,1,?,?
+45354,Red Tulip Bush,?,1,1,?,?
+48384,White Tulip Bush,?,1,1,?,?
+43334,Yellow Tulip Bush,?,1,1,?,?`;

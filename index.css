@@ -1,0 +1,141 @@
+@font-face {
+    font-family: BubblegumSans;
+    src: url("Content/BubblegumSans-Regular.ttf") format("opentype");
+}
+
+body {
+    font-family: "BubblegumSans", sans-serif !important;
+    background-color: #cf684b;    
+    background-image: url("Content/axie-buba.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-position-x: unset;
+    color: #352f3c;
+}
+  
+.sidenav {
+    width: 10%;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 10px;    
+    overflow-x: hidden;
+    padding: 8px 0;
+    text-align: center;
+}
+  
+.sidenav a {
+    padding: 16px 6px 16px 6px;
+    text-decoration: none;
+    text-align: center;
+    display: block;    
+}
+
+.sidenav i {
+    cursor: pointer;
+    font-size: 4vw;
+}
+  
+.main {
+    margin-left: 10%;
+    font-size: 2vw;
+    padding: 20px;
+}
+
+.table {
+    font-size: 2vw;
+    /* table-layout: fixed; */
+    text-align: center;    
+}
+
+.table th, tr {
+    border-color: #794143;
+}
+  
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: rgba(121, 65, 67, .3);
+}
+
+.table-main {
+    background-color: rgba(207, 104, 75, .8);
+}
+
+.item {
+    font-size: 1.2vw;
+}
+
+.savannah {
+    color: #ce9e3f !important;    
+}
+
+.forest {
+    color: #6bc001 !important;
+}
+
+.arctic {
+    color: #8bfdf1 !important;
+}
+
+.mystic {
+    color: #05aeb7 !important;
+}
+
+.genesis {
+    color: #121f57 !important;
+}
+
+.admonitus {
+    color: #910b0f !important;
+}
+
+.edenite {
+    background-color: #1aca63 !important;
+}
+
+.aqua {
+    background-color: #3689c6 !important;
+}
+
+.beastium {
+    background-color: #f18632 !important;
+}
+
+.serpentine {
+    background-color: #ae36e7 !important;
+}
+
+.amber {
+    background-color: #fc3019 !important;
+}
+
+.aerium {
+    background-color: #ffbfd9 !important;
+}
+
+.mechanium {
+    background-color: #89a4b9 !important;
+}
+
+.solar {
+    background-color: #fcfcfd !important;
+}
+
+.obsidian {
+    background-color: #37384e !important;
+    color: white;
+}
+
+.citrine {
+    background-color: #e9c52b !important;
+}
+
+.btn {
+    border: 1px solid #352f3c;
+    padding: .1vw .5vw;
+}
+
+.footer {
+    font-size: 1vw;
+    text-align: center;
+}

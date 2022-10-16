@@ -1,0 +1,1 @@
+var layer6text = ``;
