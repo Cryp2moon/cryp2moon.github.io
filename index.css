@@ -43,6 +43,20 @@ body {
     padding: 20px;
 }
 
+.title {
+    float: left;
+    text-align: left;
+}
+
+.filters {
+    float: right;
+    text-align: right;
+}
+
+.filters i {
+    cursor: pointer;
+}
+
 .table {
     font-size: 2vw;
     /* table-layout: fixed; */
@@ -90,49 +104,93 @@ body {
 }
 
 .edenite {
-    background-color: #1aca63 !important;
+    color: #1aca63 !important;
+}
+
+.edenite-bg {
+    background-color: #1aca63 !important;    
 }
 
 .aqua {
+    color: #3689c6 !important;
+}
+
+.aqua-bg {
     background-color: #3689c6 !important;
 }
 
 .beastium {
+    color: #f18632 !important;
+}
+
+.beastium-bg {
     background-color: #f18632 !important;
 }
 
 .serpentine {
+    color: #ae36e7 !important;
+}
+
+.serpentine-bg {
     background-color: #ae36e7 !important;
 }
 
 .amber {
+    color: #fc3019 !important;
+}
+
+.amber-bg {
     background-color: #fc3019 !important;
 }
 
 .aerium {
+    color: #ffbfd9 !important;
+}
+
+.aerium-bg {
     background-color: #ffbfd9 !important;
 }
 
 .mechanium {
+    color: #89a4b9 !important;
+}
+
+.mechanium-bg {
     background-color: #89a4b9 !important;
 }
 
 .solar {
+    color: #fcfcfd !important;
+}
+
+.solar-bg {
     background-color: #fcfcfd !important;
 }
 
 .obsidian {
+    color: #37384e !important;    
+}
+
+.obsidian-bg {
     background-color: #37384e !important;
     color: white;
 }
 
 .citrine {
+    color: #e9c52b !important;
+}
+
+.citrine-bg {
     background-color: #e9c52b !important;
 }
 
 .btn {
     border: 1px solid #352f3c;
     padding: .1vw .5vw;
+}
+
+.btn-display {
+    pointer-events: none;
 }
 
 .footer {

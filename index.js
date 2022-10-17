@@ -1,22 +1,29 @@
 var currentSelected = 3;
+var filter1 = false; var filter2 = false; var filter3 = false; var filter4 = false; var filter5 = false; 
+var filter6 = false; var filter7 = false; var filter8 = false; var filter9 = false; var filter0 = false;
 
 $(document).ready(function(){
-    loadLayer(layer3text);
+    loadLayer(3);
     $("#layer3").click(function () {
-        loadLayer(layer3text);
+        loadLayer(3);
         toggleNavigation(3);
     });
     $("#layer4").click(function () {
-        loadLayer(layer4text);
+        loadLayer(4);
         toggleNavigation(4);
     });
     $("#layer5").click(function () {
-        loadLayer(layer5text);
+        loadLayer(5);
         toggleNavigation(5);
     });
     $("#layer6").click(function () {
-        loadLayer(layer6text);
+        loadLayer(6);
         toggleNavigation(6);
+    });
+
+    $(".filter").click(function () {        
+        toggleFilter(($(this))[0]);
+        loadLayer(currentSelected);
     });
 });
 
@@ -29,22 +36,92 @@ function toggleNavigation(newSelected) {
     currentSelected = newSelected;
 }
 
-function loadLayer(text) {
+function toggleFilter(button) {    
+    switch (button.id) {
+        case "filter1":
+            filter1 = !filter1;
+            toggleFilterClass(button.id, filter1, "edenite");
+            break;
+        case "filter2":
+            filter2 = !filter2;
+            toggleFilterClass(button.id, filter2, "aqua");
+            break;
+        case "filter3":
+            filter3 = !filter3;
+            toggleFilterClass(button.id, filter3, "beastium");
+            break;
+        case "filter4":
+            filter4 = !filter4;
+            toggleFilterClass(button.id, filter4, "serpentine");
+            break;
+        case "filter5":
+            filter5 = !filter5;
+            toggleFilterClass(button.id, filter5, "amber");
+            break;
+        case "filter6":
+            filter6 = !filter6;
+            toggleFilterClass(button.id, filter6, "aerium");
+            break;
+        case "filter7":
+            filter7 = !filter7;
+            toggleFilterClass(button.id, filter7, "mechanium");
+            break;
+        case "filter8":
+            filter8 = !filter8
+            toggleFilterClass(button.id, filter8, "solar");
+            break;
+        case "filter9":
+            filter9 = !filter9;
+            toggleFilterClass(button.id, filter9, "obsidian");
+            break;
+        default:
+            filter0 = !filter0;
+            toggleFilterClass(button.id, filter0, "citrine");
+            break;
+    };
+}
+
+function toggleFilterClass(id, selected, name) {
+    if (selected) {
+        $('#' + id).removeClass(name);
+        $('#' + id).addClass(name + "-bg"); 
+    } else {    
+        $('#' + id).removeClass(name + "-bg");
+        $('#' + id).addClass(name);
+    }
+}
+
+function loadLayer(layer) {
     $("#tableBody").empty();
+    var text = layer == 3 ? layer3text : layer == 4 ? layer4text : layer == 5 ? layer5text : layer6text;
     var rows = text.split(/\r?\n/);
     if (!text || rows.length <= 1) return;
-    
-    for (let i in rows.sort()) {        
-        //Bleeding Heart,575,?,1,1,1,1
-        var columns = rows[i].split(',');
-        
+    //console.log(rows);
+    var filteredRows = [];
+    if (!filter1 && !filter2 && !filter3 && !filter4 && !filter5 && !filter6 && !filter7 && !filter8 && !filter9 && !filter0) {
+        filteredRows = rows;
+    } else {
+        for (let i in rows) {
+            var columns = rows[i].split(',');        
+            var code = columns[0];
+            if ((filter1 && code.includes("1")) || (filter2 && code.includes("2")) || (filter3 && code.includes("3")) || (filter4 && code.includes("4")) ||
+            (filter5 && code.includes("5")) || (filter6 && code.includes("6")) || (filter7 && code.includes("7")) || (filter8 && code.includes("8")) ||
+            (filter9 && code.includes("9")) || (filter0 && code.includes("0"))) {
+                filteredRows.push(rows[i]);
+                continue;
+            }        
+        }
+    }
+
+    for (let i in filteredRows.sort()) {        
+        //4232,?,Aloe,Admonitus,Admonitus,?
+        var columns = filteredRows[i].split(',');
         var code = columns[0];
-        var name = columns[1];
-        var savannah = columns[2];
-        var forest = columns[3];
-        var arctic = columns[4];
-        var mystic = columns[5];
-        var genesis = columns[6];
+        var savannah = columns[1];
+        var forest = columns[2];
+        var arctic = columns[3];
+        var mystic = columns[4];
+        var genesis = columns[5];
 
         var newRow = document.createElement("tr");
 
@@ -52,30 +129,25 @@ function loadLayer(text) {
         $(col1).addClass("item");
         $(col1).append(displayCode(code));
 
-        var col2 = document.createElement("td");
-        var col2text = displayPlant(name, savannah);
-        $(col2).addClass("item " + (col2text == "Admonitus" ? "admonitus" : "savannah"));
-        $(col2).append(col2text);
+        var col2 = document.createElement("td");        
+        $(col2).addClass("item " + (savannah == "Admonitus" ? "admonitus" : "savannah"));
+        $(col2).append(savannah);
 
-        var col3 = document.createElement("td");
-        var col3text = displayPlant(name, forest);
-        $(col3).addClass("item " + (col3text == "Admonitus" ? "admonitus" : "forest"));        
-        $(col3).append(col3text);
+        var col3 = document.createElement("td");        
+        $(col3).addClass("item " + (forest == "Admonitus" ? "admonitus" : "forest"));        
+        $(col3).append(forest);
 
-        var col4 = document.createElement("td");
-        var col4text = displayPlant(name, arctic);
-        $(col4).addClass("item " + (col4text == "Admonitus" ? "admonitus" : "arctic"));
-        $(col4).append(col4text);
+        var col4 = document.createElement("td");        
+        $(col4).addClass("item " + (arctic == "Admonitus" ? "admonitus" : "arctic"));
+        $(col4).append(arctic);
 
-        var col5 = document.createElement("td");
-        var col5text = displayPlant(name, mystic);
-        $(col5).addClass("item " + (col5text == "Admonitus" ? "admonitus" : "mystic"));
-        $(col5).append(col5text);
+        var col5 = document.createElement("td");        
+        $(col5).addClass("item " + (mystic == "Admonitus" ? "admonitus" : "mystic"));
+        $(col5).append(mystic);
 
-        var col6 = document.createElement("td");
-        var col6text = displayPlant(name, genesis);
-        $(col6).addClass("item " + (col6text == "Admonitus" ? "admonitus" : "genesis"));
-        $(col6).append(col6text);
+        var col6 = document.createElement("td");        
+        $(col6).addClass("item " + (genesis == "Admonitus" ? "admonitus" : "genesis"));
+        $(col6).append(genesis);
         
         $(newRow).append(col1).append(col2).append(col3).append(col4).append(col5).append(col6);        
         $("#tableBody").append(newRow);
@@ -90,34 +162,34 @@ function displayCode(code) {
         var digit = document.createElement("i");
         switch (digits[i]) {
             case "1":
-                $(button).addClass("btn edenite");
+                $(button).addClass("btn btn-display edenite-bg");
                 break;
             case "2":
-                $(button).addClass("btn aqua");
+                $(button).addClass("btn btn-display aqua-bg");
                 break;
             case "3":
-                $(button).addClass("btn beastium");
+                $(button).addClass("btn btn-display beastium-bg");
                 break;
             case "4":
-                $(button).addClass("btn serpentine");
+                $(button).addClass("btn btn-display serpentine-bg");
                 break;
             case "5":
-                $(button).addClass("btn amber");
+                $(button).addClass("btn btn-display amber-bg");
                 break;
             case "6":
-                $(button).addClass("btn aerium");
+                $(button).addClass("btn btn-display aerium-bg");
                 break;
             case "7":
-                $(button).addClass("btn mechanium");
+                $(button).addClass("btn btn-display mechanium-bg");
                 break;
             case "8":
-                $(button).addClass("btn solar");
+                $(button).addClass("btn btn-display solar-bg");
                 break;
             case "9":
-                $(button).addClass("btn obsidian");
+                $(button).addClass("btn btn-display obsidian-bg");
                 break;
             default:
-                $(button).addClass("btn citrine");
+                $(button).addClass("btn btn-display citrine-bg");
                 break;
         };
         $(button).append(digits[i]);
@@ -125,8 +197,4 @@ function displayCode(code) {
     }
 
     return div;
-}
-
-function displayPlant(name, val) {
-    return val == "?" ? val : val == "1" ? name : "Admonitus";
 }
