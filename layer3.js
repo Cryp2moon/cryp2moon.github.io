@@ -28,7 +28,7 @@ var layer3text = `575,?,Bleeding Heart,Bleeding Heart,Bleeding Heart,Bleeding He
 123,White Lily,White Lily,White Lily,White Lily,White Lily
 125,Yellow Lily,Yellow Lily,Yellow Lily,Yellow Lily,?
 139,?,Green Calla Lily,Admonitus,Green Calla Lily,?
-839,?,White Calla Lily,White Calla Lily,?,?
+839,?,White Calla Lily,White Calla Lily,Admonitus,Admonitus
 747,?,Admonitus,Admonitus,Black Lotus,Black Lotus
 881,?,Rice Shoot,Rice Shoot,Rice Shoot,Admonitus
 113,Rose Bud,Rose Bud,Rose Bud,Rose Bud,Rose Bud
@@ -40,5 +40,5 @@ var layer3text = `575,?,Bleeding Heart,Bleeding Heart,Bleeding Heart,Bleeding He
 145,Snapdragon,Snapdragon,Admonitus,Snapdragon,Snapdragon
 312,Sunflower,Sunflower,Sunflower,Sunflower,Sunflower
 425,Admonitus,Admonitus,Thistle,Thistle,Admonitus
-717,?,Vine,Vine,Vine,Vine
+717,Vine,Vine,Vine,Vine,Vine
 171,Vine,Vine,Vine,Vine,Vine`;
