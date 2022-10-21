@@ -1,9 +1,9 @@
 var currentSelected = 3;
 var filter1 = false; var filter2 = false; var filter3 = false; var filter4 = false; var filter5 = false; 
 var filter6 = false; var filter7 = false; var filter8 = false; var filter9 = false; var filter0 = false;
+var layer3 = []; var layer4 = []; var layer5 = []; var layer6 = [];
 
-$(document).ready(function(){
-    loadLayer(3);
+$(document).ready(function(){    
     $("#layer3").click(function () {
         loadLayer(3);
         toggleNavigation(3);
@@ -25,7 +25,99 @@ $(document).ready(function(){
         toggleFilter(($(this))[0]);
         loadLayer(currentSelected);
     });
+
+    fetchData();
 });
+
+function fetchData() {
+    fetch('https://content-sheets.googleapis.com/v4/spreadsheets/10VNPu42hvFeBlWX4i9KCWnrOt_4j7SpgyynMxalZ8i8/values/\'Discovery%20Overview\'!L5%3AX593?key=AIzaSyBwDJgNRk0l73tI9YQUwMp7OXdIAsPzWa4').then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // Clean data from API
+        var list = []; 
+        for (let i = 0; i < data.values.length; i++) {
+            var row = data.values[i];
+            if (row.length < 13) {
+                for (let j = row.length; j < 13; j++) {
+                    row.push("");
+                }
+            }
+
+            if (row[12] && row[12].toLowerCase() != 'x' && row[12].toLowerCase() != 'code shorthand') {
+                list.push({
+                    'Code': row[12],
+                    'Name': row[0],
+                    'Savannah': row[7],
+                    'Forest': row[8],
+                    'Arctic': row[9],
+                    'Mystic': row[10],
+                    'Genesis': row[11]
+                });
+            }
+        }
+        //console.log(list);
+        processData(list);
+        loadLayer(3);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });        
+}
+
+function processData(list) {
+    var processed = []
+    for (let i = 0; i < list.length; i++) {
+        var found = processed.find(o => o.Code == list[i].Code);
+        if (found) {
+            found.Savannah = mergeValue(list[i].Savannah, list[i].Name, found.Savannah);
+            found.Forest = mergeValue(list[i].Forest, list[i].Name, found.Forest);
+            found.Arctic = mergeValue(list[i].Arctic, list[i].Name, found.Arctic);
+            found.Mystic = mergeValue(list[i].Mystic, list[i].Name, found.Mystic);
+            found.Genesis = mergeValue(list[i].Genesis, list[i].Name, found.Genesis);
+        } else {
+            processed.push({
+                'Code': list[i].Code,
+                'Savannah': processValue(list[i].Savannah, list[i].Name),
+                'Forest': processValue(list[i].Forest, list[i].Name),
+                'Arctic': processValue(list[i].Arctic, list[i].Name),
+                'Mystic': processValue(list[i].Mystic, list[i].Name),
+                'Genesis': processValue(list[i].Genesis, list[i].Name)
+            });
+        }            
+    }
+
+    for (let i = 0; i < processed.length; i++) {
+        var row = processed[i].Code + ",";
+        row += processed[i].Savannah + ",";
+        row += processed[i].Forest + ",";
+        row += processed[i].Arctic + ",";
+        row += processed[i].Mystic + ",";
+        row += processed[i].Genesis;
+
+        if (processed[i].Code.length == 3) {            
+            layer3.push(row);
+        } else if (processed[i].Code.length == 4) {
+            layer4.push(row);
+        } else if (processed[i].Code.length == 5) {
+            layer5.push(row);
+        } else if (processed[i].Code.length == 6) {
+            layer6.push(row);
+        }
+    }
+    // console.log(layer3);
+    // console.log(layer4);
+    // console.log(layer5);
+    // console.log(layer6);
+}
+
+function processValue(val, name) {
+    return val == "" ? "?" : val.toLowerCase() == "x" ? name : "Admonitus";
+}
+
+function mergeValue(val, newName, oldName) {    
+    return val.toLowerCase() == "x" ? newName : oldName;
+}
 
 function toggleNavigation(newSelected) {
     if (currentSelected == newSelected) return;
@@ -93,9 +185,10 @@ function toggleFilterClass(id, selected, name) {
 
 function loadLayer(layer) {
     $("#tableBody").empty();
-    var text = layer == 3 ? layer3text : layer == 4 ? layer4text : layer == 5 ? layer5text : layer6text;
-    var rows = text.split(/\r?\n/);
-    if (!text || rows.length <= 1) return;
+    //var text = layer == 3 ? layer3text : layer == 4 ? layer4text : layer == 5 ? layer5text : layer6text;
+    //var rows = text.split(/\r?\n/);    
+    //if (!text || rows.length <= 1) return;
+    var rows = layer == 3 ? layer3 : layer == 4 ? layer4 : layer == 5 ? layer5 : layer6;
     //console.log(rows);
     var filteredRows = [];
     if (!filter1 && !filter2 && !filter3 && !filter4 && !filter5 && !filter6 && !filter7 && !filter8 && !filter9 && !filter0) {
