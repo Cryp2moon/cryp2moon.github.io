@@ -197,3 +197,31 @@ body {
     font-size: 1vw;
     text-align: center;
 }
+
+.finder {
+    display: none;
+}
+
+.finder-form {
+    padding: 1vw 0 0 0;
+}
+
+.input-text {
+    font-size: 2vw;
+    height: 4vw;
+}
+
+.find-button {
+    font-size: 2vw;
+    height: 4vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.finder-message {
+    padding: 1vw 0 1vw 0;
+}
+
+.finder-results {
+    padding: 1vw 0 2vw 0;
+}

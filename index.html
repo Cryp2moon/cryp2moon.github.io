@@ -9,51 +9,97 @@
     </head>
     <body>
         <div class="sidenav">
-            <a><i class="bi bi-flower1"></i></span>
+            <a><i class="bi bi-flower1"></i></a>
             <a id="layer3"><i class="bi bi-3-square-fill" title="3 Layers"></i></a>
             <a id="layer4"><i class="bi bi-4-square" title="4 Layers"></i></a>
             <a id="layer5"><i class="bi bi-5-square" title="5 Layers"></i></a>
             <a id="layer6"><i class="bi bi-6-square" title="6 Layers"></i></a>
+            <a id="finder"><i class="bi bi-eye" title="Finder"></i></a>
         </div>
             
         <div class="main">
-            <div>
-                <div>
-                    <div class="title"><h1>AXIE RAYLIGHTS RECIPES</h2></div>            
-                    <div class="filters">
-                        <span style="font-size: 1.5vw;">Filter by mineral:</span>                        
-                        <button id="filter1" class="filter btn edenite" title="Filter Edenite">1</button>
-                        <button id="filter2" class="filter btn aqua" title="Filter Aqua">2</button>
-                        <button id="filter3" class="filter btn beastium" title="Filter Beastium">3</button>
-                        <button id="filter4" class="filter btn serpentine" title="Filter Serpentine">4</button>
-                        <button id="filter5" class="filter btn amber" title="Filter Amber">5</button>
-                        <button id="filter6" class="filter btn aerium" title="Filter Aerium">6</button>
-                        <button id="filter7" class="filter btn mechanium" title="Filter Mechanium">7</button>
-                        <button id="filter8" class="filter btn solar" title="Filter Solar">8</button>
-                        <button id="filter9" class="filter btn obsidian" title="Filter Obsidian">9</button>
-                        <button id="filter0" class="filter btn citrine" title="Filter Citrine">0</button>
-                    </div>
-                    <div style="clear: both;"></div>
+            <div class="recipes">                
+                <div class="title"><h1>AXIE RAYLIGHTS RECIPES</h2></div>            
+                <div class="filters">
+                    <span style="font-size: 1.5vw;">Included minerals:</span>                        
+                    <button id="exclude1" class="exclude btn edenite-bg" title="Exclude Edenite">1</button>
+                    <button id="exclude2" class="exclude btn aqua-bg" title="Exclude Aqua">2</button>
+                    <button id="exclude3" class="exclude btn beastium-bg" title="Exclude Beastium">3</button>
+                    <button id="exclude4" class="exclude btn serpentine-bg" title="Exclude Serpentine">4</button>
+                    <button id="exclude5" class="exclude btn amber-bg" title="Exclude Amber">5</button>
+                    <button id="exclude6" class="exclude btn aerium-bg" title="Exclude Aerium">6</button>
+                    <button id="exclude7" class="exclude btn mechanium-bg" title="Exclude Mechanium">7</button>
+                    <button id="exclude8" class="exclude btn solar-bg" title="Exclude Solar">8</button>
+                    <button id="exclude9" class="exclude btn obsidian-bg" title="Exclude Obsidian">9</button>
+                    <button id="exclude0" class="exclude btn citrine-bg" title="Exclude Citrine">0</button>
+                </div>
+                <div style="clear: both;"></div>                
+                <div class="filters">
+                    <span style="font-size: 1.5vw;">Filter by a mineral:</span>
+                    <button id="filter1" class="filter btn edenite" title="Filter Edenite">1</button>
+                    <button id="filter2" class="filter btn aqua" title="Filter Aqua">2</button>
+                    <button id="filter3" class="filter btn beastium" title="Filter Beastium">3</button>
+                    <button id="filter4" class="filter btn serpentine" title="Filter Serpentine">4</button>
+                    <button id="filter5" class="filter btn amber" title="Filter Amber">5</button>
+                    <button id="filter6" class="filter btn aerium" title="Filter Aerium">6</button>
+                    <button id="filter7" class="filter btn mechanium" title="Filter Mechanium">7</button>
+                    <button id="filter8" class="filter btn solar" title="Filter Solar">8</button>
+                    <button id="filter9" class="filter btn obsidian" title="Filter Obsidian">9</button>
+                    <button id="filter0" class="filter btn citrine" title="Filter Citrine">0</button>
+                </div>
+                <div style="clear: both;"></div> 
+
+                <table class="table table-striped table-main">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th class="savannah">SAVANNAH</th>
+                            <th class="forest">FOREST</th>
+                            <th class="arctic">ARCTIC</th>
+                            <th class="mystic">MYSTIC</th>
+                            <th class="genesis">GENESIS</th>
+                        </tr>                    
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div class="footer">
+                    Some of the items in the list may not be accurate. For corrections, please add a comment to the Discovery Overview tab in the shared google
+                    <a href="https://docs.google.com/spreadsheets/d/10VNPu42hvFeBlWX4i9KCWnrOt_4j7SpgyynMxalZ8i8" target="_blank">sheet</a> <br>
+                    This is a community initiated site and is NOT affiliated with Axie Infinity, Sky Mavis and/or Quicksave Interactive.
                 </div>
             </div>
-            <table class="table table-striped table-main">
-                <thead>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th class="savannah">SAVANNAH</th>
-                        <th class="forest">FOREST</th>
-                        <th class="arctic">ARCTIC</th>
-                        <th class="mystic">MYSTIC</th>
-                        <th class="genesis">GENESIS</th>
-                    </tr>                    
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-            <div class="footer">
-                Some of the items in the list may not be accurate. For corrections, please add a comment to the Discovery Overview tab in the shared google
-                <a href="https://docs.google.com/spreadsheets/d/10VNPu42hvFeBlWX4i9KCWnrOt_4j7SpgyynMxalZ8i8" target="_blank">sheet</a> <br>
-                This is a community initiated site and is NOT affiliated with Axie Infinity, Sky Mavis and/or Quicksave Interactive.
+            <div class="finder">
+                <div class="title"><h1>AXIE RAYLIGHTS RECIPE FINDER</h2></div>
+                <div style="clear: both;"></div>
+                <div class="finder-form">
+                    <div style="float: left;"><input class="input-text form-control" type="text" placeholder="Input code (4-6 layers)" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="6" /></div>
+                    <div style="float: left;">&nbsp; <button class="find-button btn btn-primary" title="Find"><i class="bi bi-search"></i></button></div>
+                    <div style="clear: both;"></div>
+                </div>
+                <div class="finder-message">
+                    <span></span>
+                </div>
+                <div class="finder-results">
+                    <table class="table table-striped table-main">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="savannah">SAVANNAH</th>
+                                <th class="forest">FOREST</th>
+                                <th class="arctic">ARCTIC</th>
+                                <th class="mystic">MYSTIC</th>
+                                <th class="genesis">GENESIS</th>
+                            </tr>                    
+                        </thead>
+                        <tbody id="tableBodyFinder"></tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    Found a new weed recipe? Please update the Weeds sections in the shared google
+                    <a href="https://docs.google.com/spreadsheets/d/10VNPu42hvFeBlWX4i9KCWnrOt_4j7SpgyynMxalZ8i8" target="_blank">sheet</a> <br>
+                    This is a community initiated site and is NOT affiliated with Axie Infinity, Sky Mavis and/or Quicksave Interactive.
+                </div>
             </div>
-        </div>  
+        </div>        
     </body>
 </html>
