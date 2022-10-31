@@ -198,6 +198,28 @@ body {
     text-align: center;
 }
 
+.div-count {    
+    color: gold;
+    font-size: 2vw;
+}
+
+.star {        
+    cursor:pointer;
+    margin-top: -0.5vw;
+    visibility:hidden;
+}
+.star:before {
+   content: "\2606";   
+   visibility:visible;
+   color: #352f3c;
+   font-size: 1.5vw;
+}
+.star:checked:before {
+   content: "\2605";   
+   color: gold;
+   font-size: 1.5vw;
+}
+
 .finder {
     display: none;
 }

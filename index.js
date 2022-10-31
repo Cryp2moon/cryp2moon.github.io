@@ -1,12 +1,12 @@
 var currentSelected = 3;
-var exclude1 = true; var exclude2 = true; var exclude3 = true; var exclude4 = true; var exclude5 = true; 
-var exclude6 = true; var exclude7 = true; var exclude8 = true; var exclude9 = true; var exclude0 = true;
+var includes = [];
 var filter = -1;
 var layer3 = []; var layer4 = []; var layer5 = []; var layer6 = [];
 var isWeedLoaded = false;
 var layer4weeds = []; var layer5weeds = []; var layer6weeds = [];
+var checklist = [];
 
-$(document).ready(function(){    
+$(document).ready(function(){
     $("#layer3").click(function () {
         loadLayer(3);
         toggleNavigation(3);
@@ -28,21 +28,22 @@ $(document).ready(function(){
     });
     $(".find-button").click(function () {        
         findCode();
-    });
+    });    
     $(".input-text").keyup(function(e){
         if(e.keyCode == 13) findCode();
     });
 
-    $(".exclude").click(function () {        
-        toggleExclude(($(this))[0]);
+    $(".include").click(function () {        
+        toggleInclude(($(this))[0].id);
         loadLayer(currentSelected);
     });
 
     $(".filter").click(function () {        
-        toggleFilter(($(this))[0]);
+        toggleFilter(($(this))[0].id);
         loadLayer(currentSelected);
     });
 
+    loadStorage();
     fetchData();
 });
 
@@ -252,6 +253,24 @@ function toggleNavigation(newSelected) {
     currentSelected = newSelected;
 }
 
+function toggleChecklist(e) {    
+    var id = e.target.id.replace("cb", "");
+    var checked = e.target.checked;
+    var checklistItem = checklist.find(item => item.code == id);
+    if (checklistItem) {
+        checklistItem.checked = checked;
+    } else {
+        checklist.push({
+            'code': id,
+            'checked': checked
+        });
+    }
+    
+    var count = checklist.filter(item => item.checked).length;
+    $(".div-count").html(count + " &#x2605;");
+    localStorage.setItem('raylights-checklist', JSON.stringify(checklist));
+}
+
 function toggleView(isFinder) {
     if (isFinder) {
         $(".recipes").hide();
@@ -262,52 +281,82 @@ function toggleView(isFinder) {
     }
 }
 
-function toggleExclude(button) {    
-    switch (button.id) {
-        case "exclude1":
-            exclude1 = !exclude1;
-            toggleExcludeClass(button.id, exclude1, "edenite");
+function toggleInclude(id) {
+    var mineral = id.replace("include", "");
+    var includeItem = includes.find(item => item.mineral == mineral);
+    includeItem.value = !includeItem.value;
+    localStorage.setItem('raylights-includes', JSON.stringify(includes));
+    
+    switch (mineral) {
+        case "1":            
+            toggleIncludeClass(id, includeItem.value, "edenite");
             break;
-        case "exclude2":
-            exclude2 = !exclude2;
-            toggleExcludeClass(button.id, exclude2, "aqua");
+        case "2":            
+            toggleIncludeClass(id, includeItem.value, "aqua");
             break;
-        case "exclude3":
-            exclude3 = !exclude3;
-            toggleExcludeClass(button.id, exclude3, "beastium");
+        case "3":            
+            toggleIncludeClass(id, includeItem.value, "beastium");
             break;
-        case "exclude4":
-            exclude4 = !exclude4;
-            toggleExcludeClass(button.id, exclude4, "serpentine");
+        case "4":            
+            toggleIncludeClass(id, includeItem.value, "serpentine");
             break;
-        case "exclude5":
-            exclude5 = !exclude5;
-            toggleExcludeClass(button.id, exclude5, "amber");
+        case "5":            
+            toggleIncludeClass(id, includeItem.value, "amber");
             break;
-        case "exclude6":
-            exclude6 = !exclude6;
-            toggleExcludeClass(button.id, exclude6, "aerium");
+        case "6":            
+            toggleIncludeClass(id, includeItem.value, "aerium");
             break;
-        case "exclude7":
-            exclude7 = !exclude7;
-            toggleExcludeClass(button.id, exclude7, "mechanium");
+        case "7":            
+            toggleIncludeClass(id, includeItem.value, "mechanium");
             break;
-        case "exclude8":
-            exclude8 = !exclude8
-            toggleExcludeClass(button.id, exclude8, "solar");
+        case "8":            
+            toggleIncludeClass(id, includeItem.value, "solar");
             break;
-        case "exclude9":
-            exclude9 = !exclude9;
-            toggleExcludeClass(button.id, exclude9, "obsidian");
+        case "9":            
+            toggleIncludeClass(id, includeItem.value, "obsidian");
             break;
-        case "exclude0":
-            exclude0 = !exclude0;
-            toggleExcludeClass(button.id, exclude0, "citrine");
+        case "0":            
+            toggleIncludeClass(id, includeItem.value, "citrine");
             break;
     };
 }
 
-function toggleExcludeClass(id, selected, name) {
+function resetIncludeClass() {
+    $("#include1").removeClass("edenite edenite-bg");    
+    $("#include2").removeClass("aqua aqua-bg");    
+    $("#include3").removeClass("beastium beastium-bg");    
+    $("#include4").removeClass("serpentine serpentine-bg");    
+    $("#include5").removeClass("amber amber-bg");    
+    $("#include6").removeClass("aerium aerium-bg");    
+    $("#include7").removeClass("mechanium mechanium-bg");    
+    $("#include8").removeClass("solar solar-bg");    
+    $("#include9").removeClass("obsidian obsidian-bg");    
+    $("#include0").removeClass("citrine citrine-bg");
+
+    var include1 = includes.find(item => item.mineral == "1").value;
+    var include2 = includes.find(item => item.mineral == "2").value;
+    var include3 = includes.find(item => item.mineral == "3").value;
+    var include4 = includes.find(item => item.mineral == "4").value;
+    var include5 = includes.find(item => item.mineral == "5").value;
+    var include6 = includes.find(item => item.mineral == "6").value;
+    var include7 = includes.find(item => item.mineral == "7").value;
+    var include8 = includes.find(item => item.mineral == "8").value;
+    var include9 = includes.find(item => item.mineral == "9").value;
+    var include0 = includes.find(item => item.mineral == "0").value;
+
+    if (include1) $("#include1").addClass("edenite-bg"); else $("#include1").addClass("edenite");
+    if (include2) $("#include2").addClass("aqua-bg"); else $("#include2").addClass("aqua");
+    if (include3) $("#include3").addClass("beastium-bg"); else $("#include3").addClass("beastium");
+    if (include4) $("#include4").addClass("serpentine-bg"); else $("#include4").addClass("serpentine");
+    if (include5) $("#include5").addClass("amber-bg"); else $("#include5").addClass("amber");
+    if (include6) $("#include6").addClass("aerium-bg"); else $("#include6").addClass("aerium");
+    if (include7) $("#include7").addClass("mechanium-bg"); else $("#include7").addClass("mechanium");
+    if (include8) $("#include8").addClass("solar-bg"); else $("#include8").addClass("solar");
+    if (include9) $("#include9").addClass("obsidian-bg"); else $("#include9").addClass("obsidian");
+    if (include0) $("#include0").addClass("citrine-bg"); else $("#include0").addClass("citrine");
+}
+
+function toggleIncludeClass(id, selected, name) {
     if (selected) {
         $('#' + id).removeClass(name);
         $('#' + id).addClass(name + "-bg"); 
@@ -317,100 +366,102 @@ function toggleExcludeClass(id, selected, name) {
     }
 }
 
-function toggleFilter(button) {
-    var oldFilter = filter;
-    switch (button.id) {
-        case "filter1":
+function toggleFilter(id, initial) {
+    var mineral = id.replace("filter", "");
+    var oldFilter = initial ? -1 : filter;
+    switch (mineral) {
+        case "1":
             if (oldFilter == 1) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 1;
-                toggleFilterClass(button.id, "edenite");
+                toggleFilterClass(id, "edenite");
             }            
             break;
-        case "filter2":
+        case "2":
             if (oldFilter == 2) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 2;
-                toggleFilterClass(button.id, "aqua");
+                toggleFilterClass(id, "aqua");
             }            
             break;
-        case "filter3":
+        case "3":
             if (oldFilter == 3) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 3;
-                toggleFilterClass(button.id, "beastium");
+                toggleFilterClass(id, "beastium");
             }
             break;
-        case "filter4":
+        case "4":
             if (oldFilter == 4) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 4;
-                toggleFilterClass(button.id, "serpentine");
+                toggleFilterClass(id, "serpentine");
             }            
             break;
-        case "filter5":
+        case "5":
             if (oldFilter == 5) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 5;
-                toggleFilterClass(button.id, "amber");
+                toggleFilterClass(id, "amber");
             }            
             break;
-        case "filter6":
+        case "6":
             if (oldFilter == 6) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 6;
-                toggleFilterClass(button.id, "aerium");
+                toggleFilterClass(id, "aerium");
             }            
             break;
-        case "filter7":
+        case "7":
             if (oldFilter == 7) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 7;
-                toggleFilterClass(button.id, "mechanium");
+                toggleFilterClass(id, "mechanium");
             }            
             break;
-        case "filter8":
+        case "8":
             if (oldFilter == 8) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 8;
-                toggleFilterClass(button.id, "solar");
+                toggleFilterClass(id, "solar");
             }            
             break;
-        case "filter9":
+        case "9":
             if (oldFilter == 9) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 9;
-                toggleFilterClass(button.id, "obsidian");
+                toggleFilterClass(id, "obsidian");
             }            
             break;
-        case "filter0":
+        case "0":
             if (oldFilter == 0) { 
                 filter = -1;
                 clearFilterClass();
             } else {
                 filter = 0;
-                toggleFilterClass(button.id, "citrine");
+                toggleFilterClass(id, "citrine");
             }            
             break;
     };
+    localStorage.setItem('raylights-filter', filter);    
 }
 
 function clearFilterClass() {
@@ -442,19 +493,29 @@ function toggleFilterClass(id, name) {
     $('#' + id).addClass(name + "-bg");     
 }
 
-function loadLayer(layer) {
-    $("#tableBody").empty();    
+function loadLayer(layer) {    
+    $("#tableBody").empty();
     //console.log(rows);
     var rows = layer == 3 ? layer3 : layer == 4 ? layer4 : layer == 5 ? layer5 : layer6;
     
     // Exclude minerals
+    var include1 = includes.find(item => item.mineral == "1").value;
+    var include2 = includes.find(item => item.mineral == "2").value;
+    var include3 = includes.find(item => item.mineral == "3").value;
+    var include4 = includes.find(item => item.mineral == "4").value;
+    var include5 = includes.find(item => item.mineral == "5").value;
+    var include6 = includes.find(item => item.mineral == "6").value;
+    var include7 = includes.find(item => item.mineral == "7").value;
+    var include8 = includes.find(item => item.mineral == "8").value;
+    var include9 = includes.find(item => item.mineral == "9").value;
+    var include0 = includes.find(item => item.mineral == "0").value;
     var excludedRows = [];    
     for (let i in rows) {
         var columns = rows[i].split(',');        
         var code = columns[0];
-        if ((!exclude1 && code.includes("1")) || (!exclude2 && code.includes("2")) || (!exclude3 && code.includes("3")) || (!exclude4 && code.includes("4")) ||
-        (!exclude5 && code.includes("5")) || (!exclude6 && code.includes("6")) || (!exclude7 && code.includes("7")) || (!exclude8 && code.includes("8")) ||
-        (!exclude9 && code.includes("9")) || (!exclude0 && code.includes("0"))) {
+        if ((!include1 && code.includes("1")) || (!include2 && code.includes("2")) || (!include3 && code.includes("3")) || (!include4 && code.includes("4")) ||
+        (!include5 && code.includes("5")) || (!include6 && code.includes("6")) || (!include7 && code.includes("7")) || (!include8 && code.includes("8")) ||
+        (!include9 && code.includes("9")) || (!include0 && code.includes("0"))) {
             excludedRows.push(rows[i]);
             continue;
         }        
@@ -483,6 +544,17 @@ function loadLayer(layer) {
 
         var newRow = document.createElement("tr");
 
+        var colCb = document.createElement("td");
+        var cb = document.createElement("input");
+        cb.type = "checkbox";        
+        cb.id = "cb" + code;
+        var checklistItem = checklist.find(item => item.code == code);
+        if (checklistItem) {
+            cb.checked = checklistItem.checked;
+        }
+        $(cb).addClass("star");
+        $(colCb).append(cb);
+
         var col1 = document.createElement("td");
         $(col1).addClass("item");
         $(col1).append(displayCode(code));
@@ -507,9 +579,50 @@ function loadLayer(layer) {
         $(col6).addClass("item " + (genesis == "Admonitus" ? "admonitus" : "genesis"));
         $(col6).append(genesis);
         
-        $(newRow).append(col1).append(col2).append(col3).append(col4).append(col5).append(col6);        
+        $(newRow).append(colCb).append(col1).append(col2).append(col3).append(col4).append(col5).append(col6);        
         $("#tableBody").append(newRow);
     }
+
+    $(".star").click(function (e) {        
+        toggleChecklist(e);
+    });
+}
+
+function loadStorage() {
+    var checklistFromStorage = localStorage.getItem('raylights-checklist');
+    if (checklistFromStorage) {
+        checklist = JSON.parse(checklistFromStorage);
+        var count = checklist.filter(item => item.checked).length;
+        $(".div-count").html(count + " &#x2605;");
+    }
+
+    var includesFromStorage = localStorage.getItem('raylights-includes');
+    if (includesFromStorage) {
+        includes = JSON.parse(includesFromStorage);        
+    } else {
+        includes = [
+            {'mineral': '1', 'value': true},
+            {'mineral': '2', 'value': true},
+            {'mineral': '3', 'value': true},
+            {'mineral': '4', 'value': true},
+            {'mineral': '5', 'value': true},
+            {'mineral': '6', 'value': true},
+            {'mineral': '7', 'value': true},
+            {'mineral': '8', 'value': true},
+            {'mineral': '9', 'value': true},
+            {'mineral': '0', 'value': true}
+        ];
+        localStorage.setItem('raylights-includes', JSON.stringify(includes));
+    }
+    resetIncludeClass();
+
+    var filterFromStorage = localStorage.getItem('raylights-filter');
+    if (filterFromStorage) {
+        filter = parseInt(filterFromStorage);        
+    } else {
+        localStorage.setItem('raylights-filter', filter);
+    }    
+    toggleFilter("filter" + filter, true);    
 }
 
 function displayCode(code, match) {
