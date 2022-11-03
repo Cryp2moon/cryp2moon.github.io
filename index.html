@@ -22,7 +22,7 @@
             <div class="recipes">                
                 <div class="title"><h1>AXIE RAYLIGHTS RECIPES</h2></div>            
                 <div class="filters">
-                    <span style="font-size: 1.5vw;">Included minerals:</span>                        
+                    <span style="font-size: 1.5vw;">Includes:</span>                        
                     <button id="include1" class="include btn edenite-bg" title="Edenite">1</button>
                     <button id="include2" class="include btn aqua-bg" title="Aqua">2</button>
                     <button id="include3" class="include btn beastium-bg" title="Beastium">3</button>
@@ -34,9 +34,18 @@
                     <button id="include9" class="include btn obsidian-bg" title="Obsidian">9</button>
                     <button id="include0" class="include btn citrine-bg" title="Citrine">0</button>
                 </div>
-                <div style="clear: both;"></div>                
+                <div style="clear: both;"></div>
+                <div class="title">
+                    <span style="font-size: 1.5vw;">Toggle:</span>
+                    <button id="toggleStar" class="toggle btn starred-bg" title="Toggle Starred">&#x2605;</button>
+                    <button id="toggleSavannah" class="toggle btn savannah-bg" title="Toggle Savannah">S</button>
+                    <button id="toggleForest" class="toggle btn forest-bg" title="Toggle Forest">F</button>
+                    <button id="toggleArctic" class="toggle btn arctic-bg" title="Toggle Arctic">A</button>
+                    <button id="toggleMystic" class="toggle btn mystic-bg" title="Toggle Mystic">M</button>
+                    <button id="toggleGenesis" class="toggle btn genesis-bg" title="Toggle Genesis">G</button>
+                </div>
                 <div class="filters">
-                    <span style="font-size: 1.5vw;">Filter by a mineral:</span>
+                    <span style="font-size: 1.5vw;">Filter:</span>
                     <button id="filter1" class="filter btn edenite" title="Filter Edenite">1</button>
                     <button id="filter2" class="filter btn aqua" title="Filter Aqua">2</button>
                     <button id="filter3" class="filter btn beastium" title="Filter Beastium">3</button>
@@ -54,11 +63,11 @@
                     <thead>
                         <tr>
                             <th colspan="2">&nbsp;</th>
-                            <th class="savannah">SAVANNAH</th>
-                            <th class="forest">FOREST</th>
-                            <th class="arctic">ARCTIC</th>
-                            <th class="mystic">MYSTIC</th>
-                            <th class="genesis">GENESIS</th>
+                            <th id="colSavannah" class="savannah">SAVANNAH</th>
+                            <th id="colForest" class="forest">FOREST</th>
+                            <th id="colArctic" class="arctic">ARCTIC</th>
+                            <th id="colMystic" class="mystic">MYSTIC</th>
+                            <th id="colGenesis" class="genesis">GENESIS</th>
                         </tr>                    
                     </thead>
                     <tbody id="tableBody"></tbody>

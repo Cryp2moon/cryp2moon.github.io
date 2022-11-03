@@ -1,5 +1,6 @@
 var currentSelected = 3;
 var includes = [];
+var toggles = [];
 var filter = -1;
 var layer3 = []; var layer4 = []; var layer5 = []; var layer6 = [];
 var isWeedLoaded = false;
@@ -35,6 +36,11 @@ $(document).ready(function(){
 
     $(".include").click(function () {        
         toggleInclude(($(this))[0].id);
+        loadLayer(currentSelected);
+    });
+
+    $(".toggle").click(function () {        
+        toggleToggle(($(this))[0].id);
         loadLayer(currentSelected);
     });
 
@@ -366,6 +372,57 @@ function toggleIncludeClass(id, selected, name) {
     }
 }
 
+function toggleToggle(id) {
+    var toggle = id.replace("toggle", "");
+    var toggleItem = toggles.find(item => item.toggle == toggle);
+    toggleItem.value = !toggleItem.value;
+    localStorage.setItem('raylights-toggles', JSON.stringify(toggles));
+    
+    switch (toggle) {
+        case "Star":            
+            toggleIncludeClass(id, toggleItem.value, "starred");
+            break;
+        case "Savannah":            
+            toggleIncludeClass(id, toggleItem.value, "savannah");
+            break;
+        case "Forest":            
+            toggleIncludeClass(id, toggleItem.value, "forest");
+            break;
+        case "Arctic":            
+            toggleIncludeClass(id, toggleItem.value, "arctic");
+            break;
+        case "Mystic":            
+            toggleIncludeClass(id, toggleItem.value, "mystic");
+            break;
+        case "Genesis":         
+            toggleIncludeClass(id, toggleItem.value, "genesis");
+            break;
+    };
+}
+
+function resetToggleClass() {
+    $("#toggleStar").removeClass("starred starred-bg");    
+    $("#toggleSavannah").removeClass("savannah savannah-bg");    
+    $("#toggleForest").removeClass("forest forest-bg");    
+    $("#toggleArctic").removeClass("arctic arctic-bg");    
+    $("#toggleMystic").removeClass("mystic mystic-bg");    
+    $("#toggleGenesis").removeClass("genesis genesis-bg");
+
+    var toggle1 = toggles.find(item => item.toggle == "Star").value;
+    var toggle2 = toggles.find(item => item.toggle == "Savannah").value;
+    var toggle3 = toggles.find(item => item.toggle == "Forest").value;
+    var toggle4 = toggles.find(item => item.toggle == "Arctic").value;
+    var toggle5 = toggles.find(item => item.toggle == "Mystic").value;
+    var toggle6 = toggles.find(item => item.toggle == "Genesis").value;
+
+    if (toggle1) $("#toggleStar").addClass("starred-bg"); else $("#toggleStar").addClass("starred");
+    if (toggle2) $("#toggleSavannah").addClass("savannah-bg"); else $("#toggleSavannah").addClass("savannah");
+    if (toggle3) $("#toggleForest").addClass("forest-bg"); else $("#toggleForest").addClass("forest");
+    if (toggle4) $("#toggleArctic").addClass("arctic-bg"); else $("#toggleArctic").addClass("arctic");
+    if (toggle5) $("#toggleMystic").addClass("mystic-bg"); else $("#toggleMystic").addClass("mystic");
+    if (toggle6) $("#toggleGenesis").addClass("genesis-bg"); else $("#toggleGenesis").addClass("genesis");
+}
+
 function toggleFilter(id, initial) {
     var mineral = id.replace("filter", "");
     var oldFilter = initial ? -1 : filter;
@@ -532,6 +589,13 @@ function loadLayer(layer) {
         });
     }
 
+    var toggleStar = toggles.find(item => item.toggle == "Star").value;
+    var toggleSavannah = toggles.find(item => item.toggle == "Savannah").value;
+    var toggleForest = toggles.find(item => item.toggle == "Forest").value;
+    var toggleArctic = toggles.find(item => item.toggle == "Arctic").value;
+    var toggleMystic = toggles.find(item => item.toggle == "Mystic").value;
+    var toggleGenesis = toggles.find(item => item.toggle == "Genesis").value;
+
     for (let i in filteredRows.sort()) {        
         //4232,?,Aloe,Admonitus,Admonitus,?
         var columns = filteredRows[i].split(',');
@@ -550,36 +614,58 @@ function loadLayer(layer) {
         cb.id = "cb" + code;
         var checklistItem = checklist.find(item => item.code == code);
         if (checklistItem) {
+            if (checklistItem.checked && !toggleStar) continue;
             cb.checked = checklistItem.checked;
         }
         $(cb).addClass("star");
         $(colCb).append(cb);
+        $(newRow).append(colCb);
 
         var col1 = document.createElement("td");
         $(col1).addClass("item");
         $(col1).append(displayCode(code));
+        $(newRow).append(col1);
 
-        var col2 = document.createElement("td");        
-        $(col2).addClass("item " + (savannah == "Admonitus" ? "admonitus" : "savannah"));
-        $(col2).append(savannah);
+        if (toggleSavannah) {
+            var col2 = document.createElement("td");        
+            $(col2).addClass("item " + (savannah == "Admonitus" ? "admonitus" : "savannah"));
+            $(col2).append(savannah);
+            $(newRow).append(col2);
+            $("#colSavannah").show();
+        } else $("#colSavannah").hide();
 
-        var col3 = document.createElement("td");        
-        $(col3).addClass("item " + (forest == "Admonitus" ? "admonitus" : "forest"));        
-        $(col3).append(forest);
+        if (toggleForest) {
+            var col3 = document.createElement("td");        
+            $(col3).addClass("item " + (forest == "Admonitus" ? "admonitus" : "forest"));        
+            $(col3).append(forest);
+            $(newRow).append(col3);
+            $("#colForest").show();
+        } else $("#colForest").hide();
 
-        var col4 = document.createElement("td");        
-        $(col4).addClass("item " + (arctic == "Admonitus" ? "admonitus" : "arctic"));
-        $(col4).append(arctic);
+        if (toggleArctic) {
+            var col4 = document.createElement("td");        
+            $(col4).addClass("item " + (arctic == "Admonitus" ? "admonitus" : "arctic"));
+            $(col4).append(arctic);
+            $(newRow).append(col4);
+            $("#colArctic").show();
+        } else $("#colArctic").hide();
 
-        var col5 = document.createElement("td");        
-        $(col5).addClass("item " + (mystic == "Admonitus" ? "admonitus" : "mystic"));
-        $(col5).append(mystic);
+        if (toggleMystic) {
+            var col5 = document.createElement("td");        
+            $(col5).addClass("item " + (mystic == "Admonitus" ? "admonitus" : "mystic"));
+            $(col5).append(mystic);
+            $(newRow).append(col5);
+            $("#colMystic").show();
+        } else $("#colMystic").hide();
 
-        var col6 = document.createElement("td");        
-        $(col6).addClass("item " + (genesis == "Admonitus" ? "admonitus" : "genesis"));
-        $(col6).append(genesis);
-        
-        $(newRow).append(colCb).append(col1).append(col2).append(col3).append(col4).append(col5).append(col6);        
+        if (toggleGenesis) {
+            var col6 = document.createElement("td");        
+            $(col6).addClass("item " + (genesis == "Admonitus" ? "admonitus" : "genesis"));
+            $(col6).append(genesis);
+            $(newRow).append(col6);
+            $("#colGenesis").show();
+        } else $("#colGenesis").hide();
+                      
         $("#tableBody").append(newRow);
     }
 
@@ -615,6 +701,22 @@ function loadStorage() {
         localStorage.setItem('raylights-includes', JSON.stringify(includes));
     }
     resetIncludeClass();
+
+    var togglesFromStorage = localStorage.getItem('raylights-toggles');
+    if (togglesFromStorage) {
+        toggles = JSON.parse(togglesFromStorage);        
+    } else {
+        toggles = [
+            {'toggle': 'Star', 'value': true},
+            {'toggle': 'Savannah', 'value': true},
+            {'toggle': 'Forest', 'value': true},
+            {'toggle': 'Arctic', 'value': true},
+            {'toggle': 'Mystic', 'value': true},
+            {'toggle': 'Genesis', 'value': true}
+        ];
+        localStorage.setItem('raylights-toggles', JSON.stringify(toggles));
+    }
+    resetToggleClass();
 
     var filterFromStorage = localStorage.getItem('raylights-filter');
     if (filterFromStorage) {

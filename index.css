@@ -79,24 +79,62 @@ body {
     font-size: 1.2vw;
 }
 
+.starred {
+    color: #352f3c !important;
+}
+
+.starred-bg {
+    background-color: #352f3c !important;
+    color: gold;
+}
+
+.starred-bg:hover {    
+    color: gold;
+}
+
 .savannah {
     color: #ce9e3f !important;    
+}
+
+.savannah-bg {
+    background-color: #ce9e3f !important;    
 }
 
 .forest {
     color: #6bc001 !important;
 }
 
+.forest-bg {
+    background-color: #6bc001 !important;
+}
+
 .arctic {
     color: #8bfdf1 !important;
+}
+
+.arctic-bg {
+    background-color: #8bfdf1 !important;
 }
 
 .mystic {
     color: #05aeb7 !important;
 }
 
+.mystic-bg {
+    background-color: #05aeb7 !important;
+}
+
 .genesis {
     color: #121f57 !important;
+}
+
+.genesis-bg {
+    background-color: #121f57 !important;
+    color: white;
+}
+
+.genesis-bg:hover {    
+    color: white;
 }
 
 .admonitus {
@@ -173,6 +211,10 @@ body {
 
 .obsidian-bg {
     background-color: #37384e !important;
+    color: white;
+}
+
+.obsidian-bg:hover {
     color: white;
 }
 
