@@ -226,6 +226,19 @@ body {
     background-color: #e9c52b !important;
 }
 
+.cofidium {
+    color: #6c350d !important;
+}
+
+.cofidium-bg {
+    background-color: #6c350d !important;
+    color: white;
+}
+
+.cofidium-bg:hover {
+    color: white;
+}
+
 .btn {
     border: 1px solid #352f3c;
     padding: .1vw .5vw;
