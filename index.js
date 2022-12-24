@@ -812,6 +812,11 @@ function displayCode(code, match) {
                     $(button).addClass("btn btn-display cofidium");
                 else $(button).addClass("btn btn-display cofidium-bg");
                 break;
+            case "X":
+                if (match && digits[i] != matchDigits[i])
+                    $(button).addClass("btn btn-display xmas");
+                else $(button).addClass("btn btn-display xmas-bg");
+                break;
         };
         $(button).append(digits[i]);
         $(div).append(button);
@@ -826,53 +831,65 @@ function findCode() {
     var input = $(".input-text").val();
     if (input.length <= 3) return;    
     if (input.length == 4) {        
+        var isFound = false;
         var l4map = layer4.map(l => l.split(',')[0]);
         var found = l4map.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer4[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
+            // loadFinderData([layer4[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
         }
         var l4wmap = layer4weeds.map(l => l.split(',')[0]);
         found = l4wmap.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer4weeds[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
-        }
+            // loadFinderData([layer4weeds[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
+        }        
         generateSuggestions(input, l4map, l4wmap, layer4, layer4weeds);
+        if (isFound) $(".finder-message > span").text("*Recipe already found.");
     } else if (input.length == 5) {
+        var isFound = false;
         var l5map = layer5.map(l => l.split(',')[0]);
         var found = l5map.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer5[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
+            // loadFinderData([layer5[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
         }
         var l5wmap = layer5weeds.map(l => l.split(',')[0]);
         found = l5wmap.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer5weeds[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
+            // loadFinderData([layer5weeds[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
         }
         generateSuggestions(input, l5map, l5wmap, layer5, layer5weeds);
+        if (isFound) $(".finder-message > span").text("*Recipe already found.");
     } else if (input.length == 6) {
+        var isFound = false;
         var l6map = layer6.map(l => l.split(',')[0]);
         var found = l6map.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer6[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
+            // loadFinderData([layer6[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
         }
         var l6wmap = layer6weeds.map(l => l.split(',')[0]);
         found = l6wmap.findIndex(l => l == input);
         if (found >= 0 ) {
-            loadFinderData([layer6weeds[found]]);
-            $(".finder-message > span").text("*Recipe already found.");
-            return;
+            // loadFinderData([layer6weeds[found]]);
+            // $(".finder-message > span").text("*Recipe already found.");
+            // return;
+            isFound = true;
         }
         generateSuggestions(input, l6map, l6wmap, layer6, layer6weeds);
+        if (isFound) $(".finder-message > span").text("*Recipe already found.");
     }
 }
 
@@ -918,7 +935,7 @@ function loadFinderData(data, input) {
 }
 
 function generateSuggestions(input, map, wmap, layer, wlayer) {
-    var match5 = []; var match4 = []; var match3 = []; var match2 = [];
+    var match6 = []; var match5 = []; var match4 = []; var match3 = []; var match2 = [];
     var inputDigits = input.split('');
     for (let i = 0; i < map.length; i++) {
         var mapDigits = map[i].split('');
@@ -926,7 +943,7 @@ function generateSuggestions(input, map, wmap, layer, wlayer) {
         for (let j = 0; j < inputDigits.length; j++) {
             if (inputDigits[j] == mapDigits[j]) matchCounter++;
         }
-
+        if (matchCounter == 6) match6.push(layer[i]);
         if (matchCounter == 5) match5.push(layer[i]);
         if (matchCounter == 4) match4.push(layer[i]);
         if (matchCounter == 3) match3.push(layer[i]);
@@ -940,13 +957,14 @@ function generateSuggestions(input, map, wmap, layer, wlayer) {
             if (inputDigits[j] == wmapDigits[j]) matchCounter++;
         }
 
+        if (matchCounter == 6) match6.push(wlayer[i]);
         if (matchCounter == 5) match5.push(wlayer[i]);
         if (matchCounter == 4) match4.push(wlayer[i]);
         if (matchCounter == 3) match3.push(wlayer[i]);
         if (matchCounter == 2) match2.push(wlayer[i]);
     }
 
-    var merged = match5.concat(match4).concat(match3).concat(match2);
+    var merged =  match6.concat(match5).concat(match4).concat(match3).concat(match2);
     if (merged.length > 0) {
         $(".finder-message > span").text("*Recipe not yet found or shared with the community.\nThe following are similar patterns that were already tried:");
         loadFinderData(merged, input);

@@ -239,6 +239,15 @@ body {
     color: white;
 }
 
+.xmas {
+    color: #ee322c !important;
+}
+
+.xmas-bg {
+    background-color: #ee322c !important;
+    color: #3ead41;
+}
+
 .btn {
     border: 1px solid #352f3c;
     padding: .1vw .5vw;
