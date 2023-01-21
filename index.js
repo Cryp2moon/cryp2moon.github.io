@@ -327,6 +327,9 @@ function toggleInclude(id) {
         case "A":
             toggleIncludeClass(id, includeItem.value, "cofidium");
             break;
+        case "B":
+            toggleIncludeClass(id, includeItem.value, "celestine");
+            break;
     };
 }
 
@@ -342,6 +345,7 @@ function resetIncludeClass() {
     $("#include9").removeClass("obsidian obsidian-bg");    
     $("#include0").removeClass("citrine citrine-bg");
     $("#includeA").removeClass("cofidium cofidium-bg");
+    $("#includeB").removeClass("celestine celestine-bg");
 
     var include1 = includes.find(item => item.mineral == "1").value;
     var include2 = includes.find(item => item.mineral == "2").value;
@@ -354,6 +358,7 @@ function resetIncludeClass() {
     var include9 = includes.find(item => item.mineral == "9").value;
     var include0 = includes.find(item => item.mineral == "0").value;
     var includeA = includes.find(item => item.mineral == "A").value;
+    var includeB = includes.find(item => item.mineral == "B").value;
 
     if (include1) $("#include1").addClass("edenite-bg"); else $("#include1").addClass("edenite");
     if (include2) $("#include2").addClass("aqua-bg"); else $("#include2").addClass("aqua");
@@ -366,6 +371,7 @@ function resetIncludeClass() {
     if (include9) $("#include9").addClass("obsidian-bg"); else $("#include9").addClass("obsidian");
     if (include0) $("#include0").addClass("citrine-bg"); else $("#include0").addClass("citrine");
     if (includeA) $("#includeA").addClass("cofidium-bg"); else $("#includeA").addClass("cofidium");
+    if (includeB) $("#includeB").addClass("celestine-bg"); else $("#includeB").addClass("celestine");
 }
 
 function toggleIncludeClass(id, selected, name) {
@@ -532,6 +538,15 @@ function toggleFilter(id, initial) {
                 toggleFilterClass(id, "cofidium");
             }            
             break;
+        case "B":
+            if (oldFilter == "B") { 
+                filter = "-1";
+                clearFilterClass();
+            } else {
+                filter = "B";
+                toggleFilterClass(id, "celestine");
+            }            
+            break;
     };
     localStorage.setItem('raylights-filter', filter);    
 }
@@ -559,6 +574,8 @@ function clearFilterClass() {
     $("#filter0").addClass("citrine");
     $("#filterA").removeClass("cofidium cofidium-bg");
     $("#filterA").addClass("cofidium");
+    $("#filterB").removeClass("celestine celestine-bg");
+    $("#filterB").addClass("celestine");
 }
 
 function toggleFilterClass(id, name) {
@@ -584,13 +601,14 @@ function loadLayer(layer) {
     var include9 = includes.find(item => item.mineral == "9").value;
     var include0 = includes.find(item => item.mineral == "0").value;
     var includeA = includes.find(item => item.mineral == "A").value;
+    var includeB = includes.find(item => item.mineral == "B").value;
     var excludedRows = [];    
     for (let i in rows) {
         var columns = rows[i].split(',');        
         var code = columns[0];
         if ((!include1 && code.includes("1")) || (!include2 && code.includes("2")) || (!include3 && code.includes("3")) || (!include4 && code.includes("4")) ||
         (!include5 && code.includes("5")) || (!include6 && code.includes("6")) || (!include7 && code.includes("7")) || (!include8 && code.includes("8")) ||
-        (!include9 && code.includes("9")) || (!include0 && code.includes("0")) || (!includeA && code.includes("A"))) {
+        (!include9 && code.includes("9")) || (!include0 && code.includes("0")) || (!includeA && code.includes("A")) || (!includeB && code.includes("B"))) {
             excludedRows.push(rows[i]);
             continue;
         }        
@@ -707,6 +725,10 @@ function loadStorage() {
             //Add cofidium if not exist yet
             includes.push({'mineral': 'A', 'value': true});
         }
+        if (!includes.find(item => item.mineral == "B")) {
+            //Add celestine if not exist yet
+            includes.push({'mineral': 'B', 'value': true});
+        }
     } else {
         includes = [
             {'mineral': '1', 'value': true},
@@ -719,7 +741,8 @@ function loadStorage() {
             {'mineral': '8', 'value': true},
             {'mineral': '9', 'value': true},
             {'mineral': '0', 'value': true},
-            {'mineral': 'A', 'value': true}
+            {'mineral': 'A', 'value': true},
+            {'mineral': 'B', 'value': true}
         ];
         localStorage.setItem('raylights-includes', JSON.stringify(includes));
     }
@@ -811,6 +834,11 @@ function displayCode(code, match) {
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display cofidium");
                 else $(button).addClass("btn btn-display cofidium-bg");
+                break;
+            case "B":
+                if (match && digits[i] != matchDigits[i])
+                    $(button).addClass("btn btn-display celestine");
+                else $(button).addClass("btn btn-display celestine-bg");
                 break;
             case "X":
                 if (match && digits[i] != matchDigits[i])

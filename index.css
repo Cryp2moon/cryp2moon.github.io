@@ -239,6 +239,15 @@ body {
     color: white;
 }
 
+.celestine-bg {
+    background-color: #18139a !important;
+    color: #d2b252;
+}
+
+.celestine-bg:hover {
+    color: #d2b252;
+}
+
 .xmas {
     color: #ee322c !important;
 }
