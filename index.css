@@ -239,6 +239,10 @@ body {
     color: white;
 }
 
+.celestine {
+    color: #18139a !important;
+}
+
 .celestine-bg {
     background-color: #18139a !important;
     color: #d2b252;
@@ -255,6 +259,14 @@ body {
 .xmas-bg {
     background-color: #ee322c !important;
     color: #3ead41;
+}
+
+.love-quartz {
+    color: hotpink !important;
+}
+
+.love-quartz-bg {
+    background-color: hotpink !important;
 }
 
 .btn {

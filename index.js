@@ -845,6 +845,11 @@ function displayCode(code, match) {
                     $(button).addClass("btn btn-display xmas");
                 else $(button).addClass("btn btn-display xmas-bg");
                 break;
+            case "V":
+                if (match && digits[i] != matchDigits[i])
+                    $(button).addClass("btn btn-display love-quartz");
+                else $(button).addClass("btn btn-display love-quartz-bg");
+                break;
         };
         $(button).append(digits[i]);
         $(div).append(button);
