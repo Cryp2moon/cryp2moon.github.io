@@ -778,81 +778,131 @@ function displayCode(code, match) {
     var digits = [...code];
     var matchDigits = match ? [...match] : [];
     for (let i in digits) {
-        var button = document.createElement("button");        
+        var span = document.createElement("span");
+        var button = document.createElement("button");
         switch (digits[i]) {
             case "1":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display edenite");
-                else $(button).addClass("btn btn-display edenite-bg");
+                else $(button).addClass("btn btn-display edenite-bg");                                
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Edenite");
                 break;
             case "2":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display aqua");
                 else $(button).addClass("btn btn-display aqua-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Aqua");
                 break;
             case "3":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display beastium");
                 else $(button).addClass("btn btn-display beastium-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Beastium");
                 break;
             case "4":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display serpentine");
                 else $(button).addClass("btn btn-display serpentine-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Serpentine");
                 break;
             case "5":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display amber");
                 else $(button).addClass("btn btn-display amber-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Amber");
                 break;
             case "6":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display aerium");
                 else $(button).addClass("btn btn-display aerium-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Aerium");
                 break;
             case "7":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display mechanium");
                 else $(button).addClass("btn btn-display mechanium-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Mechanium");
                 break;
             case "8":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display solar");
                 else $(button).addClass("btn btn-display solar-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Solar");
                 break;
             case "9":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display obsidian");
                 else $(button).addClass("btn btn-display obsidian-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Obsidian");
                 break;
             case "0":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display citrine");
                 else $(button).addClass("btn btn-display citrine-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Citrine");
                 break;
             case "A":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display cofidium");
                 else $(button).addClass("btn btn-display cofidium-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Cofidium");
                 break;
             case "B":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display celestine");
                 else $(button).addClass("btn btn-display celestine-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Celestine");
                 break;
             case "X":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display xmas");
                 else $(button).addClass("btn btn-display xmas-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Xmas Ore");
                 break;
             case "V":
                 if (match && digits[i] != matchDigits[i])
                     $(button).addClass("btn btn-display love-quartz");
                 else $(button).addClass("btn btn-display love-quartz-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Love Quartz");
                 break;
-        };
-        $(button).append(digits[i]);
-        $(div).append(button);
+            case "S":
+                if (match && digits[i] != matchDigits[i])
+                    $(button).addClass("btn btn-display egg-stone");
+                else $(button).addClass("btn btn-display egg-stone-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Egg Stone");
+                break;
+        };        
+        $(div).append(span);
     }
 
     return div;

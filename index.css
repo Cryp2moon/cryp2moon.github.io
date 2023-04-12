@@ -269,13 +269,22 @@ body {
     background-color: hotpink !important;
 }
 
+.egg-stone {
+    color: #f1995c !important;
+}
+
+.egg-stone-bg {
+    background-color: #ede261 !important;
+    color: #f1995c;
+}
+
 .btn {
     border: 1px solid #352f3c;
     padding: .1vw .5vw;
 }
 
 .btn-display {
-    pointer-events: none;
+    pointer-events: none;    
 }
 
 .footer {
