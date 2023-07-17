@@ -253,11 +253,13 @@ body {
 }
 
 .plot-material {
-    color: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    background-image: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    background: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
 }
 
 .plot-material-bg {
-    background-color: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    background-image: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    background: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
 }
 
 .event-material {
