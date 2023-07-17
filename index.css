@@ -263,13 +263,17 @@ body {
 }
 
 .event-material {
-    color: #2ce1ee !important;
+    color: #1d7d75 !important;
 }
 
 .event-material-bg {
-    background-color: #2ce1ee !important;
+    background-color: #1d7d75 !important;
+    color: black;
 }
 
+.event-material-bg:hover {
+    color: black;
+}
 .xmas {
     color: #ee322c !important;
 }
