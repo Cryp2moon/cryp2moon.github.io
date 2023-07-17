@@ -353,7 +353,7 @@ function resetIncludeClass() {
     $("#includeA").removeClass("cofidium cofidium-bg");
     $("#includeB").removeClass("celestine celestine-bg");
     $("#includeB").removeClass("plot-material plot-material-bg");
-    $("#includeB").removeClass("celestine event-material-bg");
+    $("#includeB").removeClass("event-material event-material-bg");
 
     var include1 = includes.find(item => item.mineral == "1").value;
     var include2 = includes.find(item => item.mineral == "2").value;
@@ -645,7 +645,7 @@ function loadLayer(layer) {
         if ((!include1 && code.includes("1")) || (!include2 && code.includes("2")) || (!include3 && code.includes("3")) || (!include4 && code.includes("4")) ||
         (!include5 && code.includes("5")) || (!include6 && code.includes("6")) || (!include7 && code.includes("7")) || (!include8 && code.includes("8")) ||
         (!include9 && code.includes("9")) || (!include0 && code.includes("0")) || (!includeA && code.includes("A")) || (!includeB && code.includes("B")) || 
-        (!includeB && code.includes("P")) || (!includeB && code.includes("X"))) {
+        (!includeP && code.includes("P")) || (!includeX && code.includes("X"))) {
             excludedRows.push(rows[i]);
             continue;
         }        
