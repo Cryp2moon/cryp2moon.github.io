@@ -253,13 +253,16 @@ body {
 }
 
 .plot-material {
-    background-image: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
-    background: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    color: #121f57 !important;
 }
 
 .plot-material-bg {
-    background-image: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
-    background: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+    background-color: #121f57 !important;
+    color: white;
+}
+
+.plot-material-bg:hover {    
+    color: white;
 }
 
 .event-material {
