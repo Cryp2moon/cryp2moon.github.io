@@ -330,6 +330,12 @@ function toggleInclude(id) {
         case "B":
             toggleIncludeClass(id, includeItem.value, "celestine");
             break;
+        case "P":
+            toggleIncludeClass(id, includeItem.value, "plot-material");
+            break;
+        case "X":
+            toggleIncludeClass(id, includeItem.value, "event-material");
+            break;
     };
 }
 
@@ -346,6 +352,8 @@ function resetIncludeClass() {
     $("#include0").removeClass("citrine citrine-bg");
     $("#includeA").removeClass("cofidium cofidium-bg");
     $("#includeB").removeClass("celestine celestine-bg");
+    $("#includeB").removeClass("plot-material plot-material-bg");
+    $("#includeB").removeClass("celestine event-material-bg");
 
     var include1 = includes.find(item => item.mineral == "1").value;
     var include2 = includes.find(item => item.mineral == "2").value;
@@ -359,6 +367,8 @@ function resetIncludeClass() {
     var include0 = includes.find(item => item.mineral == "0").value;
     var includeA = includes.find(item => item.mineral == "A").value;
     var includeB = includes.find(item => item.mineral == "B").value;
+    var includeP = includes.find(item => item.mineral == "P").value;    
+    var includeX = includes.find(item => item.mineral == "X").value;
 
     if (include1) $("#include1").addClass("edenite-bg"); else $("#include1").addClass("edenite");
     if (include2) $("#include2").addClass("aqua-bg"); else $("#include2").addClass("aqua");
@@ -372,6 +382,8 @@ function resetIncludeClass() {
     if (include0) $("#include0").addClass("citrine-bg"); else $("#include0").addClass("citrine");
     if (includeA) $("#includeA").addClass("cofidium-bg"); else $("#includeA").addClass("cofidium");
     if (includeB) $("#includeB").addClass("celestine-bg"); else $("#includeB").addClass("celestine");
+    if (includeB) $("#includeP").addClass("plot-material-bg"); else $("#includeP").addClass("plot-material");
+    if (includeB) $("#includeX").addClass("event-material-bg"); else $("#includeX").addClass("event-material");
 }
 
 function toggleIncludeClass(id, selected, name) {
@@ -547,6 +559,24 @@ function toggleFilter(id, initial) {
                 toggleFilterClass(id, "celestine");
             }            
             break;
+        case "P":
+            if (oldFilter == "P") { 
+                filter = "-1";
+                clearFilterClass();
+            } else {
+                filter = "P";
+                toggleFilterClass(id, "plot-material");
+            }            
+            break;
+        case "X":
+            if (oldFilter == "X") { 
+                filter = "-1";
+                clearFilterClass();
+            } else {
+                filter = "X";
+                toggleFilterClass(id, "event-material");
+            }            
+            break;
     };
     localStorage.setItem('raylights-filter', filter);    
 }
@@ -576,6 +606,10 @@ function clearFilterClass() {
     $("#filterA").addClass("cofidium");
     $("#filterB").removeClass("celestine celestine-bg");
     $("#filterB").addClass("celestine");
+    $("#filterP").removeClass("plot-material plot-material-bg");
+    $("#filterP").addClass("plot-material");
+    $("#filterX").removeClass("event-material event-material-bg");
+    $("#filterX").addClass("event-material");
 }
 
 function toggleFilterClass(id, name) {
@@ -602,13 +636,16 @@ function loadLayer(layer) {
     var include0 = includes.find(item => item.mineral == "0").value;
     var includeA = includes.find(item => item.mineral == "A").value;
     var includeB = includes.find(item => item.mineral == "B").value;
+    var includeP = includes.find(item => item.mineral == "P").value;
+    var includeX = includes.find(item => item.mineral == "X").value;
     var excludedRows = [];    
     for (let i in rows) {
         var columns = rows[i].split(',');        
         var code = columns[0];
         if ((!include1 && code.includes("1")) || (!include2 && code.includes("2")) || (!include3 && code.includes("3")) || (!include4 && code.includes("4")) ||
         (!include5 && code.includes("5")) || (!include6 && code.includes("6")) || (!include7 && code.includes("7")) || (!include8 && code.includes("8")) ||
-        (!include9 && code.includes("9")) || (!include0 && code.includes("0")) || (!includeA && code.includes("A")) || (!includeB && code.includes("B"))) {
+        (!include9 && code.includes("9")) || (!include0 && code.includes("0")) || (!includeA && code.includes("A")) || (!includeB && code.includes("B")) || 
+        (!includeB && code.includes("P")) || (!includeB && code.includes("X"))) {
             excludedRows.push(rows[i]);
             continue;
         }        
@@ -729,6 +766,14 @@ function loadStorage() {
             //Add celestine if not exist yet
             includes.push({'mineral': 'B', 'value': true});
         }
+        if (!includes.find(item => item.mineral == "P")) {
+            //Add plot-material if not exist yet
+            includes.push({'mineral': 'P', 'value': true});
+        }
+        if (!includes.find(item => item.mineral == "X")) {
+            //Add event-material if not exist yet
+            includes.push({'mineral': 'X', 'value': true});
+        }
     } else {
         includes = [
             {'mineral': '1', 'value': true},
@@ -742,7 +787,9 @@ function loadStorage() {
             {'mineral': '9', 'value': true},
             {'mineral': '0', 'value': true},
             {'mineral': 'A', 'value': true},
-            {'mineral': 'B', 'value': true}
+            {'mineral': 'B', 'value': true},
+            {'mineral': 'P', 'value': true},
+            {'mineral': 'X', 'value': true}
         ];
         localStorage.setItem('raylights-includes', JSON.stringify(includes));
     }
@@ -877,29 +924,21 @@ function displayCode(code, match) {
                 $(span).append(button);
                 $(span).attr("title","Celestine");
                 break;
+            case "P":
+                if (match && digits[i] != matchDigits[i])
+                    $(button).addClass("btn btn-display plot-material");
+                else $(button).addClass("btn btn-display plot-material-bg");
+                $(button).append(digits[i]);
+                $(span).append(button);
+                $(span).attr("title","Plot Material");
+                break;
             case "X":
                 if (match && digits[i] != matchDigits[i])
-                    $(button).addClass("btn btn-display xmas");
-                else $(button).addClass("btn btn-display xmas-bg");
+                    $(button).addClass("btn btn-display event-material");
+                else $(button).addClass("btn btn-display event-material-bg");
                 $(button).append(digits[i]);
                 $(span).append(button);
-                $(span).attr("title","Xmas Ore");
-                break;
-            case "V":
-                if (match && digits[i] != matchDigits[i])
-                    $(button).addClass("btn btn-display love-quartz");
-                else $(button).addClass("btn btn-display love-quartz-bg");
-                $(button).append(digits[i]);
-                $(span).append(button);
-                $(span).attr("title","Love Quartz");
-                break;
-            case "S":
-                if (match && digits[i] != matchDigits[i])
-                    $(button).addClass("btn btn-display egg-stone");
-                else $(button).addClass("btn btn-display egg-stone-bg");
-                $(button).append(digits[i]);
-                $(span).append(button);
-                $(span).attr("title","Egg Stone");
+                $(span).attr("title","Event Material");
                 break;
         };        
         $(div).append(span);
