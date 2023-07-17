@@ -252,6 +252,22 @@ body {
     color: #d2b252;
 }
 
+.plot-material {
+    color: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+}
+
+.plot-material-bg {
+    background-color: linear-gradient(124deg, #ce9e3f, #6bc001, #8bfdf1, #05aeb7, #121f57) !important;
+}
+
+.event-material {
+    color: #2ce1ee !important;
+}
+
+.event-material-bg {
+    background-color: #2ce1ee !important;
+}
+
 .xmas {
     color: #ee322c !important;
 }
